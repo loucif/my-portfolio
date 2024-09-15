@@ -16,9 +16,16 @@ jobs:
 
       - name: Setup Node
         uses: actions/setup-node@v3
+        with:
+          node-version: '16' # or specify your Node.js version
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
+
+      - name: Setup environment variables
+        run: |
+          echo "VITE_BASEURL=${{ secrets.VITE_BASEURL }}" >> .env
+          echo "VITE_ENDPOINT=${{ secrets.VITE_ENDPOINT }}" >> .env
 
       - name: Build project
         run: npm run build
